@@ -1,0 +1,6 @@
+{
+  "name": "OpenCode Studio - Free QR Code & Barcode Generator",
+  "description": "Free, open-source QR Code and Barcode studio supporting UPC, ISBN, EAN, Code 128, custom styling, vector SVG, high-res PNG, batch generation, and print labels.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

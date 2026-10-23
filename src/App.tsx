@@ -4,7 +4,8 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { GeneratorMode, HistoryItem, BarcodeFormat, BarcodeConfig, QRConfig } from './types';
+import { GeneratorMode, HistoryItem, BarcodeFormat, BarcodeConfig, QRConfig, QRType } from './types';
+import { logger } from './utils/logger';
 import { Header } from './components/Header';
 import { BarcodeGenerator } from './components/BarcodeGenerator';
 import { QRCodeGenerator } from './components/QRCodeGenerator';
@@ -55,7 +56,7 @@ export default function App() {
       const saved = localStorage.getItem(HISTORY_STORAGE_KEY);
       if (saved) return JSON.parse(saved);
     } catch (e) {
-      console.warn('Could not read history from localStorage');
+      logger.warn('Could not read history from localStorage', e);
     }
     // Default initial history sample
     return [
@@ -123,7 +124,7 @@ export default function App() {
         localStorage.removeItem(HISTORY_STORAGE_KEY);
       }
     } catch (e) {
-      console.warn('Could not save history to localStorage');
+      logger.warn('Could not save history to localStorage', e);
     }
   }, [historyItems, historyEnabled]);
 
@@ -164,7 +165,7 @@ export default function App() {
       setCurrentMode('barcode');
     } else {
       setQrPreload({
-        type: (item.formatOrType as any) || 'url',
+        type: (item.formatOrType as QRType) || 'url',
         rawValue: item.value,
       });
       setCurrentMode('qrcode');

@@ -17,6 +17,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { BarcodeFormat } from '../types';
+import { logger } from '../utils/logger';
 
 interface CodeScannerProps {
   onLoadInBarcode: (value: string, format?: BarcodeFormat) => void;
@@ -92,7 +93,7 @@ export const CodeScanner: React.FC<CodeScannerProps> = ({
           return;
         }
       } catch (err) {
-        console.warn('Native BarcodeDetector threw:', err);
+        logger.warn('Native BarcodeDetector threw:', err);
       }
     }
 
@@ -122,7 +123,7 @@ export const CodeScanner: React.FC<CodeScannerProps> = ({
         scanVideoFrames();
       }
     } catch (err) {
-      console.error('Camera access failed:', err);
+      logger.error('Camera access failed:', err);
       setErrorMsg('Could not access device camera. Please check camera permissions or upload an image instead.');
       setIsScanning(false);
     }

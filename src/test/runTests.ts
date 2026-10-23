@@ -15,6 +15,7 @@ import {
   buildWiFiPayload,
   buildVCardPayload,
   buildWhatsAppPayload,
+  buildDeepLinkPayload,
   calculateContrastRatio,
   checkQRScannability,
 } from '../utils/qrUtils';
@@ -243,6 +244,14 @@ function runAllTests() {
 
   const invalidCodabar = validateBarcode('codabar', '123456789');
   assert(invalidCodabar.isValid === false, 'Codabar missing start/stop characters should be rejected');
+
+  // Test 10: Deep Link & Geo Payloads
+  console.log('\nGroup 10: Extended QR Payloads');
+  const deepLink = buildDeepLinkPayload({ schemeOrUrl: '  spotify:track:4cOdK2wGLETKBW3PvgPWqT  ' });
+  assert(deepLink === 'spotify:track:4cOdK2wGLETKBW3PvgPWqT', 'Deep link payload trims extraneous whitespace');
+
+  const emptyFilename = sanitizeFilename('', 'fallback-name');
+  assert(emptyFilename === 'fallback-name', 'Sanitizing empty string returns safe fallback name');
 
   console.log(`\n=========================================`);
   console.log(`Results: ${passed} passed, ${failed} failed`);

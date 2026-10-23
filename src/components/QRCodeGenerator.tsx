@@ -35,6 +35,7 @@ import {
   copyToClipboard,
   sanitizeFilename 
 } from '../utils/exportUtils';
+import { logger } from '../utils/logger';
 import { 
   Link2, 
   Type, 
@@ -360,7 +361,7 @@ export const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({
           }
         }
       } catch (err) {
-        console.error('QR code rendering failed:', err);
+        logger.error('QR code rendering failed:', err);
       }
     };
 
@@ -611,7 +612,7 @@ export const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({
                     <select
                       id={wifiEncId}
                       value={wifiData.encryption}
-                      onChange={(e) => setWifiData((prev) => ({ ...prev, encryption: e.target.value as any }))}
+                      onChange={(e) => setWifiData((prev) => ({ ...prev, encryption: e.target.value as 'WPA' | 'WEP' | 'nopass' }))}
                       className="bg-slate-50 border border-slate-300 rounded px-2.5 py-1 text-xs text-slate-800"
                     >
                       <option value="WPA">WPA/WPA2/WPA3 (Standard)</option>
@@ -953,7 +954,7 @@ export const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({
                     <select
                       id={cryptoCurrId}
                       value={cryptoData.currency}
-                      onChange={(e) => setCryptoData((prev) => ({ ...prev, currency: e.target.value as any }))}
+                      onChange={(e) => setCryptoData((prev) => ({ ...prev, currency: e.target.value as 'bitcoin' | 'ethereum' | 'solana' | 'upi' }))}
                       className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-900"
                     >
                       <option value="bitcoin">Bitcoin (BTC)</option>
@@ -1149,14 +1150,14 @@ export const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({
                     </label>
                     <div className="grid grid-cols-3 gap-2">
                       {[
-                        { id: 'square', label: 'Classic Square', desc: 'Crisp industrial' },
-                        { id: 'rounded', label: 'Smooth Rounded', desc: 'Softened corners' },
-                        { id: 'dots', label: 'Circular Dots', desc: 'Modern dot matrix' },
+                        { id: 'square' as const, label: 'Classic Square', desc: 'Crisp industrial' },
+                        { id: 'rounded' as const, label: 'Smooth Rounded', desc: 'Softened corners' },
+                        { id: 'dots' as const, label: 'Circular Dots', desc: 'Modern dot matrix' },
                       ].map((style) => (
                         <button
                           key={style.id}
                           type="button"
-                          onClick={() => setConfig((prev) => ({ ...prev, dotStyle: style.id as any }))}
+                          onClick={() => setConfig((prev) => ({ ...prev, dotStyle: style.id }))}
                           className={`p-2.5 text-left rounded-lg border transition-all cursor-pointer ${
                             config.dotStyle === style.id
                               ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
@@ -1252,15 +1253,15 @@ export const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {[
-                      { id: 'none', label: 'Raw QR (No Frame)' },
-                      { id: 'scan-me', label: 'Scan Me Banner' },
-                      { id: 'polaroid', label: 'Polaroid Card' },
-                      { id: 'badge', label: 'Minimal Badge' },
+                      { id: 'none' as const, label: 'Raw QR (No Frame)' },
+                      { id: 'scan-me' as const, label: 'Scan Me Banner' },
+                      { id: 'polaroid' as const, label: 'Polaroid Card' },
+                      { id: 'badge' as const, label: 'Minimal Badge' },
                     ].map((f) => (
                       <button
                         key={f.id}
                         type="button"
-                        onClick={() => setConfig((prev) => ({ ...prev, frameStyle: f.id as any }))}
+                        onClick={() => setConfig((prev) => ({ ...prev, frameStyle: f.id }))}
                         className={`px-3 py-2 text-xs rounded-lg border text-left font-medium transition-colors cursor-pointer ${
                           config.frameStyle === f.id
                             ? 'bg-slate-900 text-white border-slate-900 shadow-xs'

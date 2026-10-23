@@ -18,6 +18,7 @@ import {
   downloadPdf,
   copyToClipboard 
 } from '../utils/exportUtils';
+import { logger } from '../utils/logger';
 import { 
   Check, 
   Copy, 
@@ -143,7 +144,7 @@ export const BarcodeGenerator: React.FC<BarcodeGeneratorProps> = ({
         },
       });
     } catch (err) {
-      console.error('Barcode rendering error:', err);
+      logger.error('Barcode rendering error:', err);
       setRenderError(err instanceof Error ? err.message : 'Invalid barcode data for chosen format.');
     }
   }, [config]);

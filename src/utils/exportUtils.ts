@@ -5,6 +5,7 @@
 
 import JSZip from 'jszip';
 import { jsPDF } from 'jspdf';
+import { logger } from './logger';
 
 export interface ExportImageOptions {
   filename: string;
@@ -170,7 +171,7 @@ export async function copyToClipboard(element: SVGElement | HTMLCanvasElement): 
     await navigator.clipboard.write([item]);
     return true;
   } catch (err) {
-    console.error('Clipboard copy failed:', err);
+    logger.error('Clipboard copy failed:', err);
     return false;
   }
 }

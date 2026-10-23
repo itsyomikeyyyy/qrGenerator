@@ -16,8 +16,8 @@ Please maintain a welcoming, respectful, and constructive environment for all pa
 
 ```bash
 # Clone repository
-git clone https://github.com/opencode-studio/opencode-studio.git
-cd opencode-studio
+git clone https://github.com/itsyomikeyyyy/qrGenerator.git
+cd qrGenerator
 
 # Install dependencies
 npm install

@@ -9,6 +9,7 @@ import QRCode from 'qrcode';
 import { BarcodeFormat } from '../types';
 import { validateBarcode } from '../utils/barcodeUtils';
 import { downloadZipBundle } from '../utils/exportUtils';
+import { logger } from '../utils/logger';
 import { 
   Layers, 
   Download, 
@@ -180,7 +181,7 @@ export const BatchGenerator: React.FC = () => {
               });
             }
           } catch (e) {
-            console.error(`Failed to generate ${item.value}:`, e);
+            logger.error(`Failed to generate batch item:`, e);
           }
         } else {
           // Render QR Code
@@ -228,7 +229,7 @@ export const BatchGenerator: React.FC = () => {
         `opencode_batch_${batchType}_${Date.now()}`
       );
     } catch (err) {
-      console.error('Batch ZIP generation failed:', err);
+      logger.error('Batch ZIP generation failed:', err);
     } finally {
       setIsProcessingZip(false);
       setZipProgress('');
@@ -347,7 +348,7 @@ export const BatchGenerator: React.FC = () => {
                 <select
                   id={batchTypeId}
                   value={batchType}
-                  onChange={(e) => setBatchType(e.target.value as any)}
+                  onChange={(e) => setBatchType(e.target.value as 'barcode' | 'qrcode')}
                   className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-semibold text-slate-900"
                 >
                   <option value="barcode">Barcodes (UPC, ISBN, EAN, Code 128)</option>

@@ -103,6 +103,10 @@ Zero account registration, zero telemetry, zero server-side storage, and zero pa
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/itsyomikeyyyy/qrGenerator.git
+cd qrGenerator
+
 # Install dependencies
 npm install
 
@@ -116,6 +120,12 @@ The application includes an automated test suite verifying UPC/EAN check digit a
 
 ```bash
 npm test
+```
+
+### Full Quality Check (Test, Lint & Build)
+
+```bash
+npm run check
 ```
 
 ### Building for Production

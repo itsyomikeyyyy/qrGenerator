@@ -158,7 +158,7 @@ export const LabelSheetGenerator: React.FC<LabelSheetProps> = ({ initialItem }) 
               <select
                 id={sheetTempId}
                 value={sheetTemplate}
-                onChange={(e) => setSheetTemplate(e.target.value as any)}
+                onChange={(e) => setSheetTemplate(e.target.value as 'avery5160' | 'avery5163' | 'euro24')}
                 className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-medium text-slate-900"
               >
                 <option value="avery5160">Avery 5160 / 8160 (30 Labels, 3x10)</option>
@@ -173,7 +173,7 @@ export const LabelSheetGenerator: React.FC<LabelSheetProps> = ({ initialItem }) 
                 <select
                   id={codeTypeId}
                   value={codeType}
-                  onChange={(e) => setCodeType(e.target.value as any)}
+                  onChange={(e) => setCodeType(e.target.value as 'barcode' | 'qrcode')}
                   className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-900"
                 >
                   <option value="barcode">Barcode</option>

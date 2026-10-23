@@ -123,13 +123,15 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="whitespace-nowrap">100% Client-Side</span>
             </button>
 
-            <button
-              onClick={onOpenAbout}
+            <a
+              href="https://github.com/itsyomikeyyyy/qrGenerator"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-xs transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Github className="w-3.5 h-3.5" />
               <span className="whitespace-nowrap">Open Source</span>
-            </button>
+            </a>
           </div>
         </div>
 
